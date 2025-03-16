@@ -1,7 +1,7 @@
 # 🌍 Smart Circular Cities – AI-Powered Waste, Energy & Flood Management  
 
 ## 📌 Description  
-Smart Circular Cities is an **AI-driven, cloud-enabled platform** that integrates **waste management, solar energy tracking, and flood monitoring** to create a **sustainable and resilient urban ecosystem**. The platform leverages **machine learning, real-time data, and IoT-based tracking** to optimize city resources, encourage responsible waste disposal, and provide early disaster warnings.  
+Smart Circular Cities is an **AI-driven web application** that integrates **waste management, solar energy tracking, and flood monitoring** to create a **sustainable and resilient urban ecosystem**. The platform leverages **machine learning, real-time data, and IoT-based tracking** to optimize city resources, encourage responsible waste disposal, and provide early disaster warnings.  
 
 ---
 
@@ -42,7 +42,7 @@ Our solution **uses AI to predict, prevent, and optimize** these urban challenge
 |------------------|--------------------|
 | **Frontend**      | React, Tailwind CSS |
 | **Backend**       | FastAPI, Python, PyTorch |
-| **AI/ML**         | CLIP Model (Image Classification), Deep Learning |
+| **AI/ML**         | Yolo Model (Image Classification), Deep Learning |
 | **Cloud & APIs**  | GPS Tracking, OpenWeather API |
 | **Database**      | PostgreSQL, Firebase |
 
