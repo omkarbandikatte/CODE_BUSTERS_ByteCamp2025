@@ -15,8 +15,30 @@ const FloodMap = dynamic(() => import("@/components/flood-map"), {
   loading: () => <div className="h-[400px] flex items-center justify-center bg-gray-100">Loading map...</div>,
 })
 
+interface Alert {
+  id: number;
+  area: string;
+  issue: string;
+  severity: 'low' | 'moderate' | 'high';
+  timestamp: string;
+}
+
+interface FloodData {
+  currentRainfall: number;
+  waterLevels: {
+    mithi: number;
+    dahisar: number;
+    poisar: number;
+    oshiwara: number;
+  };
+  alertLevel: 'low' | 'moderate' | 'high' | 'severe';
+  affectedAreas: number;
+  evacuationRoutes: number;
+  predictionAccuracy: number;
+}
+
 export function FloodMonitoringDashboard() {
-  const [floodData, setFloodData] = useState({
+  const [floodData, setFloodData] = useState<FloodData>({
     currentRainfall: 12.5, // mm
     waterLevels: {
       mithi: 78, // percentage of danger level
@@ -30,29 +52,7 @@ export function FloodMonitoringDashboard() {
     predictionAccuracy: 92, // percentage
   })
 
-  const [alerts, setAlerts] = useState([
-    {
-      id: 1,
-      area: "Kurla",
-      issue: "Rising water levels in Mithi River",
-      severity: "high",
-      timestamp: "2025-03-15T10:30:00",
-    },
-    {
-      id: 2,
-      area: "Andheri East",
-      issue: "Drainage system overload risk",
-      severity: "moderate",
-      timestamp: "2025-03-15T09:45:00",
-    },
-    {
-      id: 3,
-      area: "Sion",
-      issue: "Road flooding predicted in 2 hours",
-      severity: "high",
-      timestamp: "2025-03-15T08:15:00",
-    },
-  ])
+  const [alerts] = useState<Alert[]>([])
 
   // Simulate real-time data updates
   useEffect(() => {
@@ -60,7 +60,7 @@ export function FloodMonitoringDashboard() {
       // Randomly fluctuate flood data to simulate real-time changes
       setFloodData((prev) => ({
         ...prev,
-        currentRainfall: Math.max(0, prev.currentRainfall + (Math.random() * 2 - 0.5)).toFixed(1) * 1,
+        currentRainfall: Number((Math.max(0, prev.currentRainfall + (Math.random() * 2 - 0.5))).toFixed(1)),
         waterLevels: {
           mithi: Math.min(100, Math.max(0, prev.waterLevels.mithi + (Math.random() * 4 - 1.5))),
           dahisar: Math.min(100, Math.max(0, prev.waterLevels.dahisar + (Math.random() * 3 - 1))),
@@ -74,7 +74,7 @@ export function FloodMonitoringDashboard() {
   }, [])
 
   // Get alert level color
-  const getAlertColor = (level) => {
+  const getAlertColor = (level: FloodData['alertLevel']) => {
     switch (level) {
       case "low":
         return "bg-green-500"
@@ -90,11 +90,37 @@ export function FloodMonitoringDashboard() {
   }
 
   // Get water level status
-  const getWaterLevelStatus = (level) => {
+  const getWaterLevelStatus = (level: number) => {
     if (level > 80) return "Critical"
     if (level > 60) return "Warning"
     if (level > 40) return "Elevated"
     return "Normal"
+  }
+
+  const getSeverityColor = (level: Alert['severity']) => {
+    switch (level) {
+      case "high":
+        return "text-red-500"
+      case "moderate":
+        return "text-yellow-500"
+      case "low":
+        return "text-green-500"
+      default:
+        return "text-gray-500"
+    }
+  }
+
+  const getSeverityBadge = (level: Alert['severity']) => {
+    switch (level) {
+      case "high":
+        return "destructive"
+      case "moderate":
+        return "outline"
+      case "low":
+        return "outline"
+      default:
+        return "outline"
+    }
   }
 
   return (

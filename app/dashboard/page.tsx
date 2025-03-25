@@ -12,36 +12,20 @@ import { SolarEnergyDashboard } from "@/components/solar-energy-dashboard"
 import { FloodMonitoringDashboard } from "@/components/flood-monitoring-dashboard"
 import { Trash2, Sun, Droplets, Award, Bell, ArrowRight, Upload } from "lucide-react"
 
-export default function DashboardPage() {
-  const [rewardPoints, setRewardPoints] = useState(250)
-  const [notifications, setNotifications] = useState([
-    {
-      id: 1,
-      title: "Waste Collection Alert",
-      message: "Unprocessed waste detected in Dharavi area",
-      time: "10 minutes ago",
-      read: false,
-      type: "waste",
-    },
-    {
-      id: 2,
-      title: "Solar Energy Update",
-      message: "Your solar panel efficiency has increased by 5%",
-      time: "1 hour ago",
-      read: false,
-      type: "solar",
-    },
-    {
-      id: 3,
-      title: "Flood Warning",
-      message: "Moderate flood risk in Kurla area in the next 24 hours",
-      time: "2 hours ago",
-      read: true,
-      type: "flood",
-    },
-  ])
+interface Notification {
+  id: number;
+  title: string;
+  message: string;
+  time: string;
+  read: boolean;
+  type: 'waste' | 'solar' | 'flood';
+}
 
-  const getNotificationIcon = (type) => {
+export default function DashboardPage() {
+  const [rewardPoints] = useState(0)
+  const [notifications] = useState<Notification[]>([])
+
+  const getNotificationIcon = (type: Notification['type']) => {
     switch (type) {
       case "waste":
         return <Trash2 className="h-4 w-4 text-green-600" />

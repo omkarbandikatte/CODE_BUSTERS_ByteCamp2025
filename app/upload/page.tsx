@@ -14,6 +14,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { generateText } from "ai"
 import { openai } from "@ai-sdk/openai"
 import type React from "react"
+import Image from "next/image"
 
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -105,6 +106,7 @@ export default function UploadPage() {
     e.preventDefault();
     if (!file) return;
     
+    setUploading(true);
     const formData = new FormData();
     formData.append("file", file);
   
@@ -113,24 +115,24 @@ export default function UploadPage() {
         method: "POST",
         body: formData,
         headers: {
-          "Accept": "application/json", // Do not set Content-Type for FormData
+          "Accept": "application/json",
         },
       });
   
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
   
       const data = await response.json();
-      if (response.ok) {
-        setWasteType(data.waste_type);
-        setResult(`The waste appears to be ${data.waste_type}. Confidence: ${(data.confidence * 100).toFixed(2)}%`);
-      } else {
-        setResult("Error analyzing waste. Please try again.");
+      if (data.error) {
+        throw new Error(data.error);
       }
-    } catch (error) {
+      
+      setWasteType(data.waste_type);
+      setResult(`The waste appears to be ${data.waste_type}. Confidence: ${(data.confidence * 100).toFixed(2)}%`);
+    } catch (error: any) {
       console.error("Error:", error);
-      setResult("Failed to analyze waste.");
+      setResult(`Failed to analyze waste: ${error.message || 'Unknown error'}`);
     } finally {
       setUploading(false);
     }
@@ -228,9 +230,11 @@ export default function UploadPage() {
                       <div className="flex flex-col space-y-1.5">
                         <Label>Preview</Label>
                         <div className="border rounded-md overflow-hidden">
-                          <img
+                          <Image
                             src={preview || "/placeholder.svg"}
                             alt="Waste preview"
+                            width={500}
+                            height={300}
                             className="w-full h-auto max-h-[300px] object-contain"
                           />
                         </div>

@@ -277,7 +277,7 @@ export default function Home() {
                   Sign Up Now <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" className="text-white border-white hover:bg-white/10" size="lg">
+              <Button asChild variant="outline" className="text-black border-black hover:bg-black/10" size="lg">
                 <Link href="/contact">Contact Us</Link>
               </Button>
             </div>
