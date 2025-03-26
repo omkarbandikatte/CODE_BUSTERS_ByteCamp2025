@@ -107,6 +107,9 @@ export default function UploadPage() {
     if (!file) return;
     
     setUploading(true);
+    setResult(null);
+    setWasteType(null);
+  
     const formData = new FormData();
     formData.append("file", file);
   
@@ -119,11 +122,29 @@ export default function UploadPage() {
         },
       });
   
+      // Log the raw response for debugging
+      console.log('Response status:', response.status);
+      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+  
+      const contentType = response.headers.get('content-type');
+      
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorText = await response.text();
+        console.error('Error response:', errorText);
+        throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+      }
+  
+      // Explicitly check content type
+      if (!contentType || !contentType.includes('application/json')) {
+        const text = await response.text();
+        console.error('Non-JSON response:', text);
+        throw new Error('Expected JSON response');
       }
   
       const data = await response.json();
+      
+      console.log('Received data:', data);
+  
       if (data.error) {
         throw new Error(data.error);
       }
@@ -131,14 +152,12 @@ export default function UploadPage() {
       setWasteType(data.waste_type);
       setResult(`The waste appears to be ${data.waste_type}. Confidence: ${(data.confidence * 100).toFixed(2)}%`);
     } catch (error: any) {
-      console.error("Error:", error);
+      console.error("Full error details:", error);
       setResult(`Failed to analyze waste: ${error.message || 'Unknown error'}`);
     } finally {
       setUploading(false);
     }
   };
-  
-
   // Analyze waste using AI
   const analyzeWaste = async () => {
     setAnalyzing(true)

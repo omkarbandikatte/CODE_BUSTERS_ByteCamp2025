@@ -3,6 +3,7 @@ import { FloodMonitoringDashboard } from "@/components/flood-monitoring-dashboar
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ArrowRight, FileBarChart, Droplets, AlertTriangle } from "lucide-react"
+import { RainfallForecastCard, DrainageSystemStatusCard } from "@/components/rainfall-drainage-cards"
 
 export default function FloodMonitoringPage() {
   return (
@@ -34,10 +35,13 @@ export default function FloodMonitoringPage() {
         <FloodMonitoringDashboard />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <RainfallForecastCard />
+          <DrainageSystemStatusCard />
+
           <Card>
             <CardHeader>
-              <CardTitle>Rainfall Forecast</CardTitle>
-              <CardDescription>7-day rainfall forecast for Mumbai</CardDescription>
+              <CardTitle>Emergency Contacts</CardTitle>
+              <CardDescription>Key emergency contacts for flood-related emergencies</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-[200px] flex items-center justify-center bg-gray-100 rounded-md">
