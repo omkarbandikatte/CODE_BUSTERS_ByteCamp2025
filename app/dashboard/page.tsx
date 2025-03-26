@@ -13,12 +13,12 @@ import { FloodMonitoringDashboard } from "@/components/flood-monitoring-dashboar
 import { Trash2, Sun, Droplets, Award, Bell, ArrowRight, Upload } from "lucide-react"
 
 interface Notification {
-  id: number;
+  id: string;
+  type: 'waste' | 'solar' | 'flood' | 'general';
   title: string;
   message: string;
   time: string;
   read: boolean;
-  type: 'waste' | 'solar' | 'flood';
 }
 
 export default function DashboardPage() {
@@ -148,7 +148,9 @@ export default function DashboardPage() {
                       <h4 className="font-medium">{notification.title}</h4>
                       <span className="text-xs text-muted-foreground">{notification.time}</span>
                     </div>
-                    <p className="text-sm text-muted-foreground mt-1">{notification.message}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Don&apos;t miss out on important updates and alerts
+                    </p>
                   </div>
                 </div>
               </div>
