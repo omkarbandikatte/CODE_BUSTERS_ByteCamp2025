@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import L from "leaflet"
+import L, { Map, LatLngExpression } from "leaflet"
 import "leaflet/dist/leaflet.css"
 import { useTheme } from "next-themes"
 
@@ -41,12 +41,12 @@ const truckRoutes = [
 ]
 
 export default function WasteMap() {
-  const mapRef = useRef(null)
-  const mapInstanceRef = useRef(null)
+  const mapRef = useRef<HTMLDivElement>(null)
+  const mapInstanceRef = useRef<Map | null>(null)
   const { theme } = useTheme()
 
   useEffect(() => {
-    if (typeof window !== "undefined" && !mapInstanceRef.current) {
+    if (typeof window !== "undefined" && mapRef.current && !mapInstanceRef.current) {
       // Initialize map
       const map = L.map(mapRef.current).setView([19.076, 72.8777], 12)
       mapInstanceRef.current = map
@@ -61,7 +61,7 @@ export default function WasteMap() {
         const radius = spot.intensity * 1000 // Scale intensity to radius in meters
         const color = getIntensityColor(spot.intensity)
 
-        L.circle([spot.lat, spot.lng], {
+        L.circle([spot.lat, spot.lng] as LatLngExpression, {
           radius,
           color,
           fillColor: color,
@@ -77,7 +77,7 @@ export default function WasteMap() {
 
       // Add collection truck routes
       truckRoutes.forEach((route) => {
-        L.polyline(route.path, {
+        L.polyline(route.path as LatLngExpression[], {
           color: "#3b82f6",
           weight: 3,
           dashArray: "5, 10",
@@ -95,7 +95,7 @@ export default function WasteMap() {
         })
 
         // Add marker at the first position of the route
-        L.marker(route.path[0], { icon: truckIcon })
+        L.marker(route.path[0] as LatLngExpression, { icon: truckIcon })
           .addTo(map)
           .bindPopup(`Collection Truck ID: ${route.id}<br>Status: ${route.status}`)
       })
@@ -116,7 +116,7 @@ export default function WasteMap() {
   }, [theme])
 
   // Helper function to get color based on intensity
-  function getIntensityColor(intensity) {
+  function getIntensityColor(intensity: number): string {
     if (intensity > 0.8) return "#ef4444" // Red for high intensity
     if (intensity > 0.6) return "#f97316" // Orange for medium-high intensity
     if (intensity > 0.4) return "#eab308" // Yellow for medium intensity
@@ -125,4 +125,3 @@ export default function WasteMap() {
 
   return <div ref={mapRef} className="h-full w-full" />
 }
-

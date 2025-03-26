@@ -1,12 +1,26 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import L from "leaflet"
+import L, { Map} from "leaflet"
 import "leaflet/dist/leaflet.css"
 import { useTheme } from "next-themes"
 
+// Type definitions for flood risk areas and evacuation routes
+interface FloodRiskArea {
+  lat: number;
+  lng: number;
+  risk: number;
+  name: string;
+}
+
+interface EvacuationRoute {
+  id: string;
+  path: [number, number][];
+  status: string;
+}
+
 // Mumbai flood risk areas (simulated)
-const floodRiskAreas = [
+const floodRiskAreas: FloodRiskArea[] = [
   { lat: 19.076, lng: 72.8777, risk: 0.8, name: "Kurla" },
   { lat: 19.0596, lng: 72.8295, risk: 0.6, name: "Bandra East" },
   { lat: 19.1136, lng: 72.8697, risk: 0.7, name: "Andheri East" },
@@ -17,7 +31,7 @@ const floodRiskAreas = [
 ]
 
 // Evacuation routes (simulated)
-const evacuationRoutes = [
+const evacuationRoutes: EvacuationRoute[] = [
   {
     id: "route-1",
     path: [
@@ -41,12 +55,20 @@ const evacuationRoutes = [
 ]
 
 export default function FloodMap() {
-  const mapRef = useRef(null)
-  const mapInstanceRef = useRef(null)
+  const mapRef = useRef<HTMLDivElement>(null)
+  const mapInstanceRef = useRef<Map | null>(null)
   const { theme } = useTheme()
 
+  // Helper function to get color based on risk
+  function getRiskColor(risk: number): string {
+    if (risk > 0.8) return "#ef4444" // Red for high risk
+    if (risk > 0.6) return "#f97316" // Orange for medium-high risk
+    if (risk > 0.4) return "#eab308" // Yellow for medium risk
+    return "#22c55e" // Green for low risk
+  }
+
   useEffect(() => {
-    if (typeof window !== "undefined" && !mapInstanceRef.current) {
+    if (typeof window !== "undefined" && mapRef.current && !mapInstanceRef.current) {
       // Initialize map
       const map = L.map(mapRef.current).setView([19.076, 72.8777], 12)
       mapInstanceRef.current = map
@@ -115,14 +137,5 @@ export default function FloodMap() {
     // For now, we'll just keep the default OSM style
   }, [theme])
 
-  // Helper function to get color based on risk
-  function getRiskColor(risk) {
-    if (risk > 0.8) return "#ef4444" // Red for high risk
-    if (risk > 0.6) return "#f97316" // Orange for medium-high risk
-    if (risk > 0.4) return "#eab308" // Yellow for medium risk
-    return "#22c55e" // Green for low risk
-  }
-
   return <div ref={mapRef} className="h-full w-full" />
 }
-

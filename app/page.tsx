@@ -29,7 +29,7 @@ export default function Home() {
                   Get Started <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" className="text-blue border-white hover:bg-white/10" size="lg">
+              <Button asChild variant="outline" size="lg">
                 <Link href="/about">Learn More</Link>
               </Button>
             </div>
@@ -267,8 +267,8 @@ export default function Home() {
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
                 Join the Movement for a Sustainable Mumbai
               </h2>
-              <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                Don&apos;t miss out on important updates and alerts
+              <p className="mx-auto max-w-[700px] md:text-xl">
+                Help us build a more resilient and sustainable future by contributing data and insights.
               </p>
             </div>
             <div className="space-x-4">

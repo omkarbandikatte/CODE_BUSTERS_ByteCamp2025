@@ -1,32 +1,17 @@
 "use client"
 
-// import type React from "react"
-
-// import { useState } from "react"
-// import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-// import { Button } from "@/components/ui/button"
-// import { Input } from "@/components/ui/input"
-// import { Label } from "@/components/ui/label"
-// import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-// import { Upload, Camera, FileText, AlertTriangle } from "lucide-react"
-import { generateText } from "ai"
-import { openai } from "@ai-sdk/openai"
 import type React from "react"
 import Image from "next/image"
-
 import { useState } from "react"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-// import { Textarea } from "@/components/ui/textarea"
+import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { useToast } from "@/hooks/use-toast"
 import {
   Upload,
   Camera,
@@ -35,7 +20,6 @@ import {
   Award,
   CheckCircle,
   XCircle,
-  Loader2,
   Trash2,
   Sun,
   Droplets,
@@ -45,11 +29,8 @@ export default function UploadPage() {
   const [file, setFile] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
   const [uploading, setUploading] = useState(false)
-  const [analyzing, setAnalyzing] = useState(false)
-  const [result, setResult] = useState<string | null>(null)
   const [wasteType, setWasteType] = useState<string | null>(null)
-  const [wasteLocation, setWasteLocation] = useState("")
-  const [wasteDescription, setWasteDescription] = useState("")
+  const [result, setResult] = useState<string | null>(null)
   const [uploadHistory, setUploadHistory] = useState([
     {
       id: 1,
@@ -158,49 +139,6 @@ export default function UploadPage() {
       setUploading(false);
     }
   };
-  // Analyze waste using AI
-  const analyzeWaste = async () => {
-    setAnalyzing(true)
-
-    try {
-      // Simulate AI analysis
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-
-      // For demo purposes, we'll use a mock analysis
-      // In a real application, you would send the image to an AI model
-      const mockWasteTypes = ["Plastic", "Organic", "Electronic", "Metal", "Paper"]
-      const randomWasteType = mockWasteTypes[Math.floor(Math.random() * mockWasteTypes.length)]
-      setWasteType(randomWasteType)
-
-      // Generate analysis using AI SDK
-      if (preview) {
-        try {
-          const { text } = await generateText({
-            model: openai("gpt-4o"),
-            prompt: `Analyze this waste image and provide a detailed assessment. The waste appears to be ${randomWasteType}. Provide information about:
-            1. Environmental impact
-            2. Proper disposal methods
-            3. Recycling potential
-            4. Estimated decomposition time
-            Keep the response concise but informative.`,
-          })
-
-          setResult(text)
-        } catch (error) {
-          console.error("Error generating analysis:", error)
-          setResult(
-            "Unable to generate detailed analysis. The waste appears to be " +
-              randomWasteType +
-              ". Please ensure proper disposal according to local guidelines.",
-          )
-        }
-      }
-    } catch (error) {
-      console.error("Error analyzing waste:", error)
-    } finally {
-      setAnalyzing(false)
-    }
-  }
 
   return (
     <div className="container mx-auto py-10 px-4">
@@ -240,7 +178,7 @@ export default function UploadPage() {
                           type="file"
                           accept="image/*"
                           onChange={handleFileChange}
-                          disabled={uploading || analyzing}
+                          disabled={uploading}
                         />
                       </div>
                     </div>
@@ -260,8 +198,8 @@ export default function UploadPage() {
                       </div>
                     )}
 
-                    <Button type="submit" disabled={!file || uploading || analyzing} className="w-full">
-                      {uploading ? "Uploading..." : analyzing ? "Analyzing..." : "Upload & Analyze"}
+                    <Button type="submit" disabled={!file || uploading} className="w-full">
+                      {uploading ? "Uploading..." : "Upload & Analyze"}
                     </Button>
                   </div>
                 </form>
@@ -281,10 +219,10 @@ export default function UploadPage() {
                   </div>
                 )}
 
-                {(uploading || analyzing) && (
+                {uploading && (
                   <div className="flex flex-col items-center justify-center h-[300px] text-center">
                     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mb-4"></div>
-                    <p>{uploading ? "Uploading image..." : "Analyzing waste..."}</p>
+                    <p>Uploading image...</p>
                   </div>
                 )}
 
@@ -307,6 +245,7 @@ export default function UploadPage() {
             </Card>
           </div>
         </TabsContent>
+
 
         <TabsContent value="report" className="mt-6">
           <div className="grid gap-6 md:grid-cols-2">

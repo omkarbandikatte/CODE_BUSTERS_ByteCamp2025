@@ -23,8 +23,8 @@ export function SolarEnergyDashboard() {
       // Randomly fluctuate energy data to simulate real-time changes
       setEnergyData((prev) => ({
         ...prev,
-        currentGeneration: Math.max(0, prev.currentGeneration + (Math.random() * 2 - 1)).toFixed(1) * 1,
-        batteryLevel: Math.min(100, Math.max(0, prev.batteryLevel + (Math.random() * 2 - 0.5))).toFixed(1) * 1,
+        currentGeneration: parseFloat((Math.max(0, prev.currentGeneration + (Math.random() * 2 - 1))).toFixed(1)),
+        batteryLevel: parseFloat((Math.min(100, Math.max(0, prev.batteryLevel + (Math.random() * 2 - 0.5)))).toFixed(1)),
       }))
     }, 3000)
 
@@ -175,4 +175,3 @@ export function SolarEnergyDashboard() {
     </div>
   )
 }
-
