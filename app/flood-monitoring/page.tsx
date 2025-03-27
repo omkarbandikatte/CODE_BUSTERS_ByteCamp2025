@@ -10,9 +10,9 @@ export default function FloodMonitoringPage() {
     <div className="container mx-auto py-10 px-4">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold">Flood Monitoring & Alerts</h1>
+          <h1 className="text-3xl font-bold">Flood Monitoring</h1>
           <p className="text-muted-foreground mt-1">
-            AI-based flood prediction system for early warnings and emergency response
+            Real-time monitoring of Mumbai&apos;s flood-prone areas and early warning system
           </p>
         </div>
         <div className="flex gap-2">

@@ -16,14 +16,33 @@ export const metadata: Metadata = {
       {
         url: "/mumabiurban.webp",
         type: "image/webp",
+        sizes: "32x32",
+      },
+      {
+        url: "/mumabiurban.webp",
+        type: "image/webp",
+        sizes: "16x16",
       },
     ],
     apple: [
       {
         url: "/mumabiurban.webp",
         type: "image/webp",
+        sizes: "180x180",
       },
     ],
+    shortcut: "/mumabiurban.webp",
+  },
+  manifest: "/manifest.json",
+  themeColor: "#ffffff",
+  viewport: "width=device-width, initial-scale=1",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Mumbai Urban Management",
+  },
+  formatDetection: {
+    telephone: false,
   },
 }
 

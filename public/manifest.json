@@ -1,0 +1,21 @@
+{
+  "name": "Mumbai Urban Management System",
+  "short_name": "Mumbai Urban",
+  "description": "Integrated platform for waste management, solar energy tracking, and flood monitoring",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/mumabiurban.webp",
+      "sizes": "192x192",
+      "type": "image/webp"
+    },
+    {
+      "src": "/mumabiurban.webp",
+      "sizes": "512x512",
+      "type": "image/webp"
+    }
+  ]
+} 

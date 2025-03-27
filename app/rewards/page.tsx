@@ -389,7 +389,7 @@ export default function RewardsPage() {
           <Card>
             <CardHeader>
               <CardTitle>Ways to Earn Reward Points</CardTitle>
-              <CardDescription>Contribute to Mumbai's sustainability and earn rewards</CardDescription>
+              <CardDescription>Contribute to Mumbai&apos;s sustainability and earn rewards</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-6">

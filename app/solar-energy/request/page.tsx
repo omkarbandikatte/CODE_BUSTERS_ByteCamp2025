@@ -54,6 +54,7 @@ export default function SolarRequestPage() {
       setDescription("")
       setStep(1)
     } catch (error) {
+      console.error("Upload failed:", error)
       toast({
         title: "Submission Failed",
         description: "There was an error submitting your request. Please try again.",

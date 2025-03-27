@@ -37,6 +37,20 @@ interface FloodData {
   predictionAccuracy: number;
 }
 
+// Get alert level color based on severity
+const getAlertColor = (level: string) => {
+  switch (level) {
+    case "severe":
+      return "bg-red-500"
+    case "high":
+      return "bg-orange-500"
+    case "moderate":
+      return "bg-yellow-500"
+    default:
+      return "bg-green-500"
+  }
+}
+
 export function FloodMonitoringDashboard() {
   const [floodData, setFloodData] = useState<FloodData>({
     currentRainfall: 12.5, // mm
