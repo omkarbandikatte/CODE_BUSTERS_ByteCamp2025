@@ -2,6 +2,7 @@
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
+    dirs: ['app', 'components'],
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
