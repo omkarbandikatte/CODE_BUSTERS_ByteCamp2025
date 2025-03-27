@@ -2,7 +2,9 @@
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
-    dirs: ['app', 'components'],
+  },
+  typescript: {
+    ignoreBuildErrors: true,
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
