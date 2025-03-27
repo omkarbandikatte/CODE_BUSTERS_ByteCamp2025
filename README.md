@@ -4,6 +4,8 @@
 Smart Circular Cities is an **AI-driven web application** that integrates **waste management, solar energy tracking, and flood monitoring** to create a **sustainable and resilient urban ecosystem**. The platform leverages **machine learning, real-time data, and Satellite-based tracking** to optimize city resources, encourage responsible waste disposal, and provide early disaster warnings.  
 
 ---
+## Demo Video
+
 
 ## 🚨 Problem Statement  
 Urban areas face **three critical challenges**:  
