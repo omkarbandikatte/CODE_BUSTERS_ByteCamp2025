@@ -75,4 +75,10 @@ We welcome contributions! 🎉
 - Submit a Pull Request 🚀  
 
 ---
+
+## 📜 License  
+**MIT License** – Free to use, modify, and distribute.  
+
+---
+
 🚀 **Join us in building smarter, sustainable cities!** 🏙💡
