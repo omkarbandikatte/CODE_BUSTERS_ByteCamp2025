@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { Navbar } from "@/components/navbar"
@@ -7,6 +7,12 @@ import { Toaster } from "@/components/ui/toaster"
 import { ClientProviders } from "./client-providers"
 
 const inter = Inter({ subsets: ["latin"] })
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#ffffff",
+}
 
 export const metadata: Metadata = {
   title: "Mumbai Urban Management System",
@@ -34,8 +40,6 @@ export const metadata: Metadata = {
     shortcut: "/mumabiurban.webp",
   },
   manifest: "/manifest.json",
-  themeColor: "#ffffff",
-  viewport: "width=device-width, initial-scale=1",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",

@@ -6,6 +6,10 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
+  images: {
+    domains: ['tile.openstreetmap.org'],
+  },
+  transpilePackages: ['lucide-react'],
 }
 
 module.exports = nextConfig 

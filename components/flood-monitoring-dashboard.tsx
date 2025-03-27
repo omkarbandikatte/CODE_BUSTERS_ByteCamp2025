@@ -66,8 +66,6 @@ export function FloodMonitoringDashboard() {
     predictionAccuracy: 92, // percentage
   })
 
-  const [alerts] = useState<Alert[]>([])
-
   // Simulate real-time data updates
   useEffect(() => {
     const interval = setInterval(() => {
@@ -247,19 +245,13 @@ export function FloodMonitoringDashboard() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {alerts.map((alert) => (
-                  <Alert key={alert.id} variant={alert.severity === "high" ? "destructive" : "default"}>
-                    <AlertTriangle className="h-4 w-4" />
-                    <AlertTitle>
-                      {alert.area}: {alert.issue}
-                    </AlertTitle>
-                    <AlertDescription>
-                      Severity: {alert.severity.charAt(0).toUpperCase() + alert.severity.slice(1)}
-                      <br />
-                      Reported: {new Date(alert.timestamp).toLocaleString()}
-                    </AlertDescription>
-                  </Alert>
-                ))}
+                <Alert variant="default">
+                  <AlertTriangle className="h-4 w-4" />
+                  <AlertTitle>No Active Alerts</AlertTitle>
+                  <AlertDescription>
+                    There are currently no active flood alerts in your area.
+                  </AlertDescription>
+                </Alert>
               </div>
             </CardContent>
           </Card>
