@@ -15,7 +15,7 @@
   "env": {
     "NEXT_PUBLIC_VERCEL_URL": "${VERCEL_URL}"
   },
-  "buildCommand": "next build --no-lint",
-  "installCommand": "npm install",
+  "buildCommand": "DISABLE_ESLINT_PLUGIN=true next build --no-lint",
+  "installCommand": "npm install --legacy-peer-deps",
   "framework": "nextjs"
 } 

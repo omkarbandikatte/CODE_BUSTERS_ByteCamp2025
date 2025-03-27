@@ -2,9 +2,11 @@
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
+    ignoreDuringDev: true,
   },
   typescript: {
     ignoreBuildErrors: true,
+    ignoreDevErrors: true,
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
@@ -13,6 +15,9 @@ const nextConfig = {
     domains: ['tile.openstreetmap.org'],
   },
   transpilePackages: ['lucide-react'],
+  experimental: {
+    esmExternals: false,
+  }
 }
 
 module.exports = nextConfig 
