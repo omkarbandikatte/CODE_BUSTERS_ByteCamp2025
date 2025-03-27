@@ -1,9 +1,11 @@
 # 🌍 Smart Circular Cities – AI-Powered Waste, Energy & Flood Management  
 
 ## 📌 Description  
-Smart Circular Cities is an **AI-driven web application** that integrates **waste management, solar energy tracking, and flood monitoring** to create a **sustainable and resilient urban ecosystem**. The platform leverages **machine learning, real-time data, and IoT-based tracking** to optimize city resources, encourage responsible waste disposal, and provide early disaster warnings.  
+Smart Circular Cities is an **AI-driven web application** that integrates **waste management, solar energy tracking, and flood monitoring** to create a **sustainable and resilient urban ecosystem**. The platform leverages **machine learning, real-time data, and Satellite-based tracking** to optimize city resources, encourage responsible waste disposal, and provide early disaster warnings.  
 
 ---
+## Demo Video
+
 
 ## 🚨 Problem Statement  
 Urban areas face **three critical challenges**:  
@@ -52,17 +54,17 @@ Our solution **uses AI to predict, prevent, and optimize** these urban challenge
 
 ### 🛠 Backend Setup  
 ```bash
-git clone https://github.com/your-repo.git  
+git clone https://github.com/omkarbandikatte/Level_Up-Prototype.git  
 cd your-repo  
 pip install -r requirements.txt  
-uvicorn app:app --reload  
+python -m uvicorn app:app --host 127.0.0.1 --port 8000 --reload  
 ```
 
 ### 🎨 Frontend Setup  
 ```bash
 cd frontend  
 npm install  
-npm start  
+npm run dev  
 ```
 
 ---
