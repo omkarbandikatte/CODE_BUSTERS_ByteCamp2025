@@ -5,6 +5,7 @@ Smart Circular Cities is an **AI-driven web application** that integrates **wast
 
 ---
 ## Demo Video
+https://drive.google.com/file/d/1_plht5k0eIncE_RnaAYolcn_-QnRqWXG/view?usp=sharing
 
 ---
 ## 🚨 Challenges  
