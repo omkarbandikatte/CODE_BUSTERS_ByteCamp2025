@@ -31,33 +31,12 @@ export default function UploadPage() {
   const [uploading, setUploading] = useState(false)
   const [wasteType, setWasteType] = useState<string | null>(null)
   const [result, setResult] = useState<string | null>(null)
-  const [uploadHistory, setUploadHistory] = useState([
-    {
-      id: 1,
-      type: "Plastic",
-      location: "Dharavi",
-      date: "2025-03-15",
-      status: "verified",
-      points: 25,
-    },
-    {
-      id: 2,
-      type: "Electronic",
-      location: "Andheri East",
-      date: "2025-03-12",
-      status: "verified",
-      points: 40,
-    },
-    {
-      id: 3,
-      type: "Paper",
-      location: "Bandra West",
-      date: "2025-03-10",
-      status: "rejected",
-      points: 0,
-      reason: "Image quality too low",
-    },
-  ])
+
+  interface UploadResult {
+    type: string;
+    confidence: number;
+    recommendations: string[];
+  }
 
   // Handle file selection
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,61 +63,25 @@ export default function UploadPage() {
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!file) return;
-    
-    setUploading(true);
-    setResult(null);
-    setWasteType(null);
-  
-    const formData = new FormData();
-    formData.append("file", file);
-  
+    e.preventDefault()
+    if (!file || !wasteType) return
+
+    setUploading(true)
     try {
-      const response = await fetch("http://127.0.0.1:8000/classify/", {
-        method: "POST",
-        body: formData,
-        headers: {
-          "Accept": "application/json",
-        },
-      });
-  
-      // Log the raw response for debugging
-      console.log('Response status:', response.status);
-      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
-  
-      const contentType = response.headers.get('content-type');
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Error response:', errorText);
-        throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      const result: UploadResult = {
+        type: wasteType,
+        confidence: 0.95,
+        recommendations: ["Recycle", "Compost"]
       }
-  
-      // Explicitly check content type
-      if (!contentType || !contentType.includes('application/json')) {
-        const text = await response.text();
-        console.error('Non-JSON response:', text);
-        throw new Error('Expected JSON response');
-      }
-  
-      const data = await response.json();
-      
-      console.log('Received data:', data);
-  
-      if (data.error) {
-        throw new Error(data.error);
-      }
-      
-      setWasteType(data.waste_type);
-      setResult(`The waste appears to be ${data.waste_type}. Confidence: ${(data.confidence * 100).toFixed(2)}%`);
-    } catch (error: any) {
-      console.error("Full error details:", error);
-      setResult(`Failed to analyze waste: ${error.message || 'Unknown error'}`);
+      setResult(JSON.stringify(result, null, 2))
+    } catch (error) {
+      console.error("Upload failed:", error)
     } finally {
-      setUploading(false);
+      setUploading(false)
     }
-  };
+  }
 
   return (
     <div className="container mx-auto py-10 px-4">
@@ -430,69 +373,6 @@ export default function UploadPage() {
           </div>
         </TabsContent>
 
-        <TabsContent value="history" className="mt-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Upload History</CardTitle>
-              <CardDescription>Track your contributions and earned rewards</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-6">
-                <div className="rounded-md border">
-                  <div className="grid grid-cols-6 p-4 font-medium border-b">
-                    <div className="col-span-2">Type & Location</div>
-                    <div>Date</div>
-                    <div>Status</div>
-                    <div>Points</div>
-                    <div>Actions</div>
-                  </div>
-                  {uploadHistory.map((upload) => (
-                    <div key={upload.id} className="grid grid-cols-6 p-4 border-b last:border-0 items-center">
-                      <div className="col-span-2">
-                        <div className="font-medium">{upload.type}</div>
-                        <div className="text-sm text-muted-foreground">{upload.location}</div>
-                      </div>
-                      <div className="text-sm">{upload.date}</div>
-                      <div>
-                        {upload.status === "verified" ? (
-                          <Badge variant="outline" className="bg-green-100 text-green-800 border-green-200">
-                            Verified
-                          </Badge>
-                        ) : (
-                          <Badge variant="outline" className="bg-red-100 text-red-800 border-red-200">
-                            Rejected
-                          </Badge>
-                        )}
-                      </div>
-                      <div className="font-medium">{upload.points > 0 ? `+${upload.points}` : "0"}</div>
-                      <div>
-                        <Button variant="ghost" size="sm">
-                          View
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex justify-between items-center p-4 bg-muted rounded-lg">
-                  <div>
-                    <p className="text-sm font-medium">Total Uploads: {uploadHistory.length}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {uploadHistory.filter((u) => u.status === "verified").length} verified,
-                      {uploadHistory.filter((u) => u.status === "rejected").length} rejected
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium">Total Points Earned:</p>
-                    <p className="text-xl font-bold text-primary">
-                      {uploadHistory.reduce((sum, upload) => sum + upload.points, 0)}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
         <TabsContent value="data" className="mt-6">
           <Card>
             <CardHeader>
@@ -509,47 +389,21 @@ export default function UploadPage() {
                     <div>Points</div>
                     <div>Actions</div>
                   </div>
-                  {uploadHistory.map((upload) => (
-                    <div key={upload.id} className="grid grid-cols-6 p-4 border-b last:border-0 items-center">
-                      <div className="col-span-2">
-                        <div className="font-medium">{upload.type}</div>
-                        <div className="text-sm text-muted-foreground">{upload.location}</div>
-                      </div>
-                      <div className="text-sm">{upload.date}</div>
-                      <div>
-                        {upload.status === "verified" ? (
-                          <Badge variant="outline" className="bg-green-100 text-green-800 border-green-200">
-                            Verified
-                          </Badge>
-                        ) : (
-                          <Badge variant="outline" className="bg-red-100 text-red-800 border-red-200">
-                            Rejected
-                          </Badge>
-                        )}
-                      </div>
-                      <div className="font-medium">{upload.points > 0 ? `+${upload.points}` : "0"}</div>
-                      <div>
-                        <Button variant="ghost" size="sm">
-                          View
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
+                  <div className="p-4 text-center text-muted-foreground">
+                    No upload history available
+                  </div>
                 </div>
 
                 <div className="flex justify-between items-center p-4 bg-muted rounded-lg">
                   <div>
-                    <p className="text-sm font-medium">Total Uploads: {uploadHistory.length}</p>
+                    <p className="text-sm font-medium">Total Uploads: 0</p>
                     <p className="text-sm text-muted-foreground">
-                      {uploadHistory.filter((u) => u.status === "verified").length} verified,
-                      {uploadHistory.filter((u) => u.status === "rejected").length} rejected
+                      0 verified, 0 rejected
                     </p>
                   </div>
                   <div>
                     <p className="text-sm font-medium">Total Points Earned:</p>
-                    <p className="text-xl font-bold text-primary">
-                      {uploadHistory.reduce((sum, upload) => sum + upload.points, 0)}
-                    </p>
+                    <p className="text-xl font-bold text-primary">0</p>
                   </div>
                 </div>
               </div>

@@ -46,7 +46,7 @@ export default function Home() {
                 Integrated Urban Solutions
               </h2>
               <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                Our platform addresses Mumbai's most pressing urban challenges through technology and community
+                Our platform addresses Mumbai&apos;s most pressing urban challenges through technology and community
                 engagement.
               </p>
             </div>
@@ -227,7 +227,7 @@ export default function Home() {
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Impact at a Glance</h2>
             <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400 mt-4">
-              Our platform is making a real difference in Mumbai's urban environment.
+              Our platform is making a real difference in Mumbai&apos;s urban environment.
             </p>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

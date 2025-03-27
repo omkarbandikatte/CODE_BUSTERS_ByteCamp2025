@@ -12,7 +12,7 @@ import { Award, Gift, Zap, ShoppingBag, Trash2, Sun, Droplets, Users, CheckCircl
 export default function RewardsPage() {
   const { toast } = useToast()
   const [rewardPoints, setRewardPoints] = useState(250)
-  const [rewardLevel, setRewardLevel] = useState("Silver")
+  const rewardLevel = "Silver"
   const [rewardHistory, setRewardHistory] = useState([
     {
       id: 1,
@@ -128,7 +128,7 @@ export default function RewardsPage() {
                   <div>
                     <span className="text-sm font-medium">Current Level</span>
                     <h3 className="text-2xl font-bold flex items-center">
-                      {rewardLevel}
+                      {getNextLevelName()}
                       <Badge className="ml-2" variant="outline">
                         {rewardPoints} points
                       </Badge>

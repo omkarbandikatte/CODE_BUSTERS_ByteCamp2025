@@ -73,54 +73,12 @@ export function FloodMonitoringDashboard() {
     return () => clearInterval(interval)
   }, [])
 
-  // Get alert level color
-  const getAlertColor = (level: FloodData['alertLevel']) => {
-    switch (level) {
-      case "low":
-        return "bg-green-500"
-      case "moderate":
-        return "bg-yellow-500"
-      case "high":
-        return "bg-orange-500"
-      case "severe":
-        return "bg-red-500"
-      default:
-        return "bg-gray-500"
-    }
-  }
-
   // Get water level status
   const getWaterLevelStatus = (level: number) => {
     if (level > 80) return "Critical"
     if (level > 60) return "Warning"
     if (level > 40) return "Elevated"
     return "Normal"
-  }
-
-  const getSeverityColor = (level: Alert['severity']) => {
-    switch (level) {
-      case "high":
-        return "text-red-500"
-      case "moderate":
-        return "text-yellow-500"
-      case "low":
-        return "text-green-500"
-      default:
-        return "text-gray-500"
-    }
-  }
-
-  const getSeverityBadge = (level: Alert['severity']) => {
-    switch (level) {
-      case "high":
-        return "destructive"
-      case "moderate":
-        return "outline"
-      case "low":
-        return "outline"
-      default:
-        return "outline"
-    }
   }
 
   return (

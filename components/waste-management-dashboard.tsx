@@ -22,30 +22,6 @@ export function WasteManagementDashboard() {
     landfill: 750,
   })
 
-  const [alerts, setAlerts] = useState([
-    {
-      id: 1,
-      area: "Dharavi",
-      issue: "Unprocessed waste accumulation",
-      severity: "high",
-      timestamp: "2025-03-15T10:30:00",
-    },
-    {
-      id: 2,
-      area: "Bandra East",
-      issue: "Collection delay",
-      severity: "medium",
-      timestamp: "2025-03-15T09:45:00",
-    },
-    {
-      id: 3,
-      area: "Andheri West",
-      issue: "Drain blockage risk",
-      severity: "high",
-      timestamp: "2025-03-15T08:15:00",
-    },
-  ])
-
   // Simulate real-time data updates
   useEffect(() => {
     const interval = setInterval(() => {
@@ -139,19 +115,7 @@ export function WasteManagementDashboard() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {alerts.map((alert) => (
-                  <Alert key={alert.id} variant={alert.severity === "high" ? "destructive" : "default"}>
-                    <AlertTriangle className="h-4 w-4" />
-                    <AlertTitle>
-                      {alert.area}: {alert.issue}
-                    </AlertTitle>
-                    <AlertDescription>
-                      Severity: {alert.severity.charAt(0).toUpperCase() + alert.severity.slice(1)}
-                      <br />
-                      Reported: {new Date(alert.timestamp).toLocaleString()}
-                    </AlertDescription>
-                  </Alert>
-                ))}
+                {/* Placeholder for alerts */}
               </div>
             </CardContent>
           </Card>

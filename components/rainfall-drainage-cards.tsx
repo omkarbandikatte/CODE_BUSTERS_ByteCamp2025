@@ -83,7 +83,7 @@ export function DrainageSystemStatusCard() {
     <Card>
       <CardHeader>
         <CardTitle>Drainage System Status</CardTitle>
-        <CardDescription>Current capacity of Mumbai's drainage system</CardDescription>
+        <CardDescription>Current capacity of Mumbai&apos;s drainage system</CardDescription>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={200}>

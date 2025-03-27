@@ -11,7 +11,7 @@ export default function WasteManagementPage() {
         <div>
           <h1 className="text-3xl font-bold">Waste Management</h1>
           <p className="text-muted-foreground mt-1">
-            Real-time monitoring and management of Mumbai's waste collection system
+            Real-time monitoring and management of Mumbai&apos;s waste collection system
           </p>
         </div>
         <div className="flex gap-2">

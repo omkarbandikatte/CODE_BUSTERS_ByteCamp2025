@@ -17,6 +17,7 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 import { Menu, Trash2, Sun, Droplets, Home, BarChart3 } from "lucide-react"
+import Image from "next/image"
 
 export function Navbar() {
   const pathname = usePathname()
@@ -60,6 +61,13 @@ export function Navbar() {
       <div className="container flex h-16 items-center">
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
+            <Image
+              src="/mumabiurban.webp"
+              alt="Mumbai Urban Management Logo"
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
             <span className="hidden font-bold sm:inline-block">Mumbai Urban Management</span>
           </Link>
           <NavigationMenu>
@@ -75,7 +83,7 @@ export function Navbar() {
                   <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                     <li className="row-span-3">
                       <NavigationMenuLink asChild>
-                        <a
+                        <Link
                           className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-green-50 to-blue-50 p-6 no-underline outline-none focus:shadow-md"
                           href="/"
                         >
@@ -83,7 +91,7 @@ export function Navbar() {
                           <p className="text-sm leading-tight text-muted-foreground">
                             Integrated platform for waste management, solar energy tracking, and flood monitoring
                           </p>
-                        </a>
+                        </Link>
                       </NavigationMenuLink>
                     </li>
                     <Link href="/waste-management" legacyBehavior passHref>
@@ -138,7 +146,14 @@ export function Navbar() {
             </Button>
           </SheetTrigger>
           <SheetContent side="left">
-            <Link href="/" className="flex items-center" onClick={() => setIsOpen(false)}>
+            <Link href="/" className="flex items-center space-x-2" onClick={() => setIsOpen(false)}>
+              <Image
+                src="/mumabiurban.webp"
+                alt="Mumbai Urban Management Logo"
+                width={32}
+                height={32}
+                className="rounded-full"
+              />
               <span className="font-bold">Mumbai Urban Management</span>
             </Link>
             <div className="mt-6 flex flex-col gap-3">

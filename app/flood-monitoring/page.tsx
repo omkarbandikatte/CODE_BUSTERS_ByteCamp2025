@@ -53,7 +53,7 @@ export default function FloodMonitoringPage() {
           <Card>
             <CardHeader>
               <CardTitle>Drainage System Status</CardTitle>
-              <CardDescription>Current status of Mumbai's drainage system</CardDescription>
+              <CardDescription>Current status of Mumbai&apos;s drainage system</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="h-[200px] flex items-center justify-center bg-gray-100 rounded-md">

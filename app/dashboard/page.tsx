@@ -44,7 +44,7 @@ export default function DashboardPage() {
         <div>
           <h1 className="text-3xl font-bold">Dashboard</h1>
           <p className="text-muted-foreground mt-1">
-            Welcome back! Here's an overview of Mumbai's urban management systems.
+            Welcome back! Here&apos;s an overview of Mumbai&apos;s urban management systems.
           </p>
         </div>
         <div className="flex gap-2">
