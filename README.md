@@ -52,17 +52,17 @@ Our solution **uses AI to predict, prevent, and optimize** these urban challenge
 
 ### 🛠 Backend Setup  
 ```bash
-git clone https://github.com/your-repo.git  
+git clone https://github.com/omkarbandikatte/Level_Up-Prototype.git  
 cd your-repo  
 pip install -r requirements.txt  
-uvicorn app:app --reload  
+python -m uvicorn app:app --host 127.0.0.1 --port 8000 --reload  
 ```
 
 ### 🎨 Frontend Setup  
 ```bash
 cd frontend  
 npm install  
-npm start  
+npm run dev  
 ```
 
 ---
