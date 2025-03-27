@@ -6,8 +6,8 @@ Smart Circular Cities is an **AI-driven web application** that integrates **wast
 ---
 ## Demo Video
 
-
-## 🚨 Problem Statement  
+---
+## 🚨 Challenges  
 Urban areas face **three critical challenges**:  
 
 1. **Inefficient Waste Management** – Poor segregation, fraudulent disposal, and lack of optimized collection routes lead to pollution.  
